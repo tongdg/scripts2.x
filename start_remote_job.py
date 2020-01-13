@@ -2,16 +2,19 @@
 # -*- coding:utf8 -*-
 
 import requests
+import sys
 
 # 远程触发jenkins
 REMOTE_URL = 'http://192.168.32.195'
 PORT = '8080'
 PROJECT_NAME = 'test_job'
 TOKEN = '123456'
+ARGV = sys.argv[1]
 REMOTE_JOB_URL = '%s:%s/jenkins/job/%s/build?token=%s' % (REMOTE_URL, PORT, PROJECT_NAME, TOKEN)
 REMOTE_JENKINS_LOGIN_URL = '%s:%s/jenkins/j_acegi_security_check' % (REMOTE_URL, PORT)
+ARGV_REMOTE_JOB_URL = '%s:%s/jenkins/job/%s/buildWithParameters?token=%s&vm_ip=%s' % (REMOTE_URL, PORT, PROJECT_NAME, TOKEN, ARGV)
 
-
+print ARGV_REMOTE_JOB_URL
 session = requests.session()
 bady = {
     'j_username': 'ync',
@@ -28,7 +31,7 @@ response = session.post(
 )
 
 result = session.get(
-    url=REMOTE_JOB_URL
+    url=ARGV_REMOTE_JOB_URL
 )
-
+print result.content
 assert result.content == ''
