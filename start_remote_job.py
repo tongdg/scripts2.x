@@ -7,7 +7,7 @@ import sys
 # 远程触发jenkins
 REMOTE_URL = 'http://192.168.32.195'
 PORT = '8080'
-PROJECT_NAME = 'config_sosotest_url'
+PROJECT_NAME = 'config_sosotest_ip'
 TOKEN = '123456'
 ARGV = sys.argv[1]
 REMOTE_JOB_URL = '%s:%s/jenkins/job/%s/build?token=%s' % (REMOTE_URL, PORT, PROJECT_NAME, TOKEN)
